@@ -1787,33 +1787,37 @@ elif page == "Help":
     st.title("Panduan Penggunaan")
 
     st.markdown("""
-    ### Langkah penggunaan
+    Aplikasi ini merupakan purwarupa sistem untuk menghasilkan
+    prediksi harga nikel dunia dalam jangka pendek menggunakan
+    **CatBoost Regressor**. Model memanfaatkan data historis harga
+    nikel dan variabel eksternal sebagai prediktor.
 
-    1. Buka halaman **Prediction**.
-    2. Tentukan tanggal acuan prediksi.
-    3. Masukkan tujuh variabel eksternal.
-    4. Jika stok nikel pada tanggal acuan belum tersedia,
-       gunakan nilai stok terakhir yang tercatat dan tentukan
-       tanggal data stok tersebut.
-    5. Masukkan tiga nilai historis harga nikel sesuai
-       pembentukan fitur lag pada model.
-    6. Pastikan seluruh input tidak nol.
-    7. Nilai negatif hanya diperbolehkan pada WTI Price,
-       sesuai definisi seri data yang digunakan.
-    8. Klik **Prediksi Semua Horizon**.
-    9. Hasil prediksi horizon 1, 2, 3, 4, dan 5 hari akan
-       ditampilkan secara bersamaan.
-
-    ### Catatan
-
-    - Data harus menggunakan satuan dan definisi yang sama
-      dengan data saat model dilatih.
-    - Data missing tidak boleh otomatis dianggap sebagai nol.
-    - Nilai stok terakhir hanya digunakan sebagai pendekatan
-      jika stok terbaru belum tersedia.
-    - Aplikasi tidak mengambil data pasar secara otomatis.
-    - Hasil prediksi merupakan estimasi model.
+    Tata cara pengoperasian aplikasi dapat dibaca melalui buku manual
+    yang tersedia di bawah ini.
     """)
+
+    manual_files = list(BASE_DIR.glob("Manual_Book.*"))
+
+    if manual_files:
+        manual_path = manual_files[0]
+        mime_type = (
+            "application/pdf"
+            if manual_path.suffix.lower() == ".pdf"
+            else "application/octet-stream"
+        )
+
+        st.download_button(
+            label="📥 Unduh Buku Manual",
+            data=manual_path.read_bytes(),
+            file_name=manual_path.name,
+            mime=mime_type,
+            use_container_width=True,
+        )
+    else:
+        st.error(
+            "File Manual_Book tidak ditemukan. "
+            "Pastikan file berada di folder app."
+        )
 
 
 # ==================================================
