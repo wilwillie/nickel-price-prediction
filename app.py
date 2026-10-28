@@ -1267,8 +1267,8 @@ elif page == "Prediction":
 
                 for col, horizon in zip(cols, HORIZONS):
                     col.metric(
-                        f"Prediksi H+{horizon}",
-                        f"{hasil_prediksi[horizon]:,.2f} USD/ton",
+                        f"Prediksi H+{horizon} (USD/ton)",
+                        f"{hasil_prediksi[horizon]:,.2f}",
                     )
 
                 # ----------------------------------
@@ -1309,6 +1309,7 @@ elif page == "Prediction":
                     ),
                     textfont=dict(color="#F1F6F7", size=11),
                     cliponaxis=False,
+                    hovertemplate="%{x}: %{y:,.2f} USD/ton<extra></extra>",
                 )
 
                 fig_prediksi.update_layout(
