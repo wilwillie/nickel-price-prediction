@@ -1035,70 +1035,70 @@ elif page == "Prediction":
 
     with col1:
         nickel_stock = number_input_with_source(
-            "LME Nickel Stock",
+            "LME Nickel Stock (USD/ton)",
             "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Ni_cash",
             value=None,
             step=1.0,
             format="%.0f",
-            placeholder="Masukkan stok nikel",
+            placeholder="15545",
             help="Masukkan nilai stok nikel terakhir yang tersedia.",
         )
 
         dollar_index = number_input_with_source(
-            "Dollar Index",
+            "Dollar Index (index)",
             "https://fred.stlouisfed.org/series/DTWEXBGS",
             value=None,
             format="%.4f",
-            placeholder="Masukkan indeks dolar",
+            placeholder="121.3848",
             help="Masukkan indeks dolar terakhir yang tersedia.",
         )
 
         wti_price = number_input_with_source(
-            "WTI Price",
+            "WTI Price (USD/barrel)",
             "https://fred.stlouisfed.org/series/DCOILWTICO",
             value=None,
             format="%.2f",
-            placeholder="Masukkan harga WTI",
+            placeholder="96.24",
             help="Nilai negatif diperbolehkan sesuai data sumber.",
         )
 
     with col2:
         aluminium_price = number_input_with_source(
-            "LME Aluminium Price",
+            "LME Aluminium Price (USD/ton)",
             "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash",
             value=None,
             step=0.1,
             format="%.1f",
-            placeholder="Masukkan harga aluminium",
+            placeholder="3055.5",
             help="Masukkan harga aluminium terakhir yang tersedia.",
         )
 
         copper_price = number_input_with_source(
-            "LME Copper Price",
+            "LME Copper Price (USD/ton)",
             "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Cu_cash",
             value=None,
             step=0.1,
             format="%.1f",
-            placeholder="Masukkan harga tembaga",
+            placeholder="14689",
             help="Masukkan harga tembaga terakhir yang tersedia.",
         )
 
         zinc_price = number_input_with_source(
-            "LME Zinc Price",
+            "LME Zinc Price (USD/ton)",
             "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Zn_cash",
             value=None,
             step=0.1,
             format="%.1f",
-            placeholder="Masukkan harga seng",
+            placeholder="3840",
             help="Masukkan harga seng terakhir yang tersedia.",
         )
 
         iron_ore_price = number_input_with_source(
-            "Iron Ore Price",
+            "Iron Ore Price (USD/ton)",
             "https://id.investing.com/commodities/iron-ore-62-cfr-futures",
             value=None,
             format="%.2f",
-            placeholder="Masukkan harga bijih besi",
+            placeholder="90.68",
             help="Masukkan harga bijih besi terakhir yang tersedia.",
         )
 
@@ -1113,31 +1113,31 @@ elif page == "Prediction":
 
     with lag_col1:
         lag1 = number_input_with_source(
-            "LME Nickel Price (H-1)",
+            "LME Nickel Price (H-1) (USD/ton)",
             lag_source,
             value=None,
             format="%.2f",
-            placeholder="Harga nikel H-1",
+            placeholder="15415",
             help="Masukkan harga nikel satu hari sebelumnya.",
         )
 
     with lag_col2:
         lag2 = number_input_with_source(
-            "LME Nickel Price (H-2)",
+            "LME Nickel Price (H-2) (USD/ton)",
             lag_source,
             value=None,
             format="%.2f",
-            placeholder="Harga nikel H-2",
+            placeholder="15645",
             help="Masukkan harga nikel dua hari sebelumnya.",
         )
 
     with lag_col3:
         lag3 = number_input_with_source(
-            "LME Nickel Price (H-3)",
+            "LME Nickel Price (H-3) (USD/ton)",
             lag_source,
             value=None,
             format="%.2f",
-            placeholder="Harga nikel H-3",
+            placeholder="15530",
             help="Masukkan harga nikel tiga hari sebelumnya.",
         )
         
@@ -1268,7 +1268,7 @@ elif page == "Prediction":
                 for col, horizon in zip(cols, HORIZONS):
                     col.metric(
                         f"Prediksi H+{horizon}",
-                        f"{hasil_prediksi[horizon]:,.2f}"
+                        f"{hasil_prediksi[horizon]:,.2f} USD/ton",
                     )
 
                 # ----------------------------------
@@ -1293,7 +1293,7 @@ elif page == "Prediction":
                     markers=True,
                     labels={
                         "Horizon": "Horizon Prediksi",
-                        "Harga Prediksi": "Harga Nikel",
+                        "Harga Prediksi": "Harga Nikel (USD/ton)",
                     },
                 )
 
@@ -1304,8 +1304,8 @@ elif page == "Prediction":
                     marker_size=9,
                     textposition="top center",
                     texttemplate=(
-                        "Horizon Prediksi: %{x}<br>"
-                        "Harga Nikel: %{y:,.2f}"
+                        "Horizon: %{x}<br>"
+                        "Harga: %{y:,.2f} USD/ton"
                     ),
                     textfont=dict(color="#F1F6F7", size=11),
                     cliponaxis=False,
@@ -1564,7 +1564,7 @@ elif page == "Validation":
         barmode="group",
         text="Harga",
         title=(
-            "Harga Aktual vs Prediksi — "
+            "Harga Aktual vs Prediksi (USD/ton) — "
             f"{tanggal_pilihan:%d-%m-%Y}"
         ),
         labels={
@@ -1668,9 +1668,9 @@ elif page == "Validation":
                 continue
 
             row = row_df.iloc[0]
-            st.metric("Harga Aktual", f"{row['Aktual']:,.2f}")
-            st.metric("Harga Prediksi", f"{row['Prediksi']:,.2f}")
-            st.metric("Absolute Error", f"{row['Absolute Error']:,.2f}")
+            st.metric("Harga Aktual (USD/ton)", f"{row['Aktual']:,.2f}")
+            st.metric("Harga Prediksi (USD/ton)", f"{row['Prediksi']:,.2f}")
+            st.metric("Absolute Error (USD/ton)", f"{row['Absolute Error']:,.2f}")
 
     with st.expander("Lihat tabel metrik pada tanggal terpilih"):
 
@@ -1855,6 +1855,7 @@ elif page == "About":
             Fakultas Teknologi Informasi<br>
             Universitas Tarumanagara<br>
             Angkatan 2023<br><br>
+            [📩 wensteinwilliam@gmail.com](mailto:wensteinwilliam@gmail.com)<br>
             [🔗 Kunjungi profil LinkedIn](https://www.linkedin.com/in/william-wenstein/)
             """,
             unsafe_allow_html=True,
