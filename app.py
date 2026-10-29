@@ -28,7 +28,7 @@ MODEL_DIR = (
 )
 
 FEATURES = [
-    "LME Nickel stock",
+    "LME Nickel Stock",
     "LME Aluminium Price",
     "LME Copper Price",
     "LME Zinc Price",
@@ -892,7 +892,7 @@ elif page == "Prediction":
 
         - [Buka data Nickel di Westmetall](https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Ni_cash)
         - Cari tanggal acuan/terakhir pada tabel.
-        - Ambil nilai pada kolom **LME Nickel stock**.
+        - Ambil nilai pada kolom **LME Nickel Stock**.
         - Satuan: ton.
 
         **2. LME Aluminium Price**
@@ -1149,7 +1149,7 @@ elif page == "Prediction":
     if st.button("Prediksi Semua Horizon", type="primary"):
 
         input_data = {
-            "LME Nickel stock": nickel_stock,
+            "LME Nickel Stock": nickel_stock,
             "LME Aluminium Price": aluminium_price,
             "LME Copper Price": copper_price,
             "LME Zinc Price": zinc_price,
