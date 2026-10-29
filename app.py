@@ -35,9 +35,9 @@ FEATURES = [
     "Iron Ore Price",
     "Dollar Index",
     "WTI Price",
-    "Nickel_Lag_1",
-    "Nickel_Lag_2",
-    "Nickel_Lag_3",
+    "LME Nickel Price Lag 1",
+    "LME Nickel Price Lag 2",
+    "LME Nickel Price Lag 3",
 ]
 
 HORIZONS = [1, 2, 3, 4, 5]
@@ -52,19 +52,19 @@ MODEL_FILES = {
 
 EVALUATION = pd.DataFrame({
     "Horizon (hari)": [1, 2, 3, 4, 5],
-    "Skema": ["70:30", "80:20", "70:30", "70:30", "70:30"],
-    "Jumlah Data Uji": [892, 595, 891, 891, 891],
+    "Skema": ["80:20", "80:20", "80:20", "80:20", "80:20"],
+    "Jumlah Data Uji": [595, 595, 594, 594, 594],
     "MAE": [
-        814.3205, 662.3807, 999.5211, 947.7005, 1086.2150
+        536.3788, 662.3807, 827.8417, 929.6537, 949.3268
     ],
     "RMSE": [
-        988.5078, 826.1914, 1270.2620, 1151.8480, 1268.3120
+        633.8613, 826.1914, 989.3937, 1137.2799, 1092.9267
     ],
     "MAPE (%)": [
-        4.750609, 4.092780, 5.866374, 5.591483, 6.481942
+        3.3708, 4.0928, 5.1143, 5.6962, 5.9050
     ],
     "R2": [
-        0.791658, 0.486082, 0.653291, 0.714919, 0.654354
+        0.6975, 0.4861, 0.2605, 0.0229, 0.0976
     ],
 })
 
@@ -1156,9 +1156,9 @@ elif page == "Prediction":
             "Iron Ore Price": iron_ore_price,
             "Dollar Index": dollar_index,
             "WTI Price": wti_price,
-            "Nickel_Lag_1": lag1,
-            "Nickel_Lag_2": lag2,
-            "Nickel_Lag_3": lag3,
+            "LME Nickel Price Lag 1": lag1,
+            "LME Nickel Price Lag 2": lag2,
+            "LME Nickel Price Lag 3": lag3,
         }
 
         # Validasi angka
@@ -1729,12 +1729,6 @@ elif page == "Validation":
 
     for horizon in HORIZONS:
         fi = importance_data[horizon].copy()
-
-        fi["Fitur"] = fi["Fitur"].replace({
-            "Nickel_Lag_1": "LME Nickel Price Lag 1",
-            "Nickel_Lag_2": "LME Nickel Price Lag 2",
-            "Nickel_Lag_3": "LME Nickel Price Lag 3",
-        })
 
         fig_importance = px.bar(
             fi,
